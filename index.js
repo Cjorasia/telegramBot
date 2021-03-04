@@ -13,10 +13,10 @@ bot.on('text', (ctx) => {
     return fetch(`http://api.weatherstack.com/current?access_key=752fdebad4f0126557b99d7259680da5&query=${query}`, { method: 'POST', body: 'a=1' })
     .then(res => res.json()) // expecting a json response
     .then(json => ctx.reply(
-        "LOCATION :", json.location.name,
-        "COUNTRY :", json.location.country,
-        "REGION :" , json.location.region,
-        "TEMPERATURE",json.current.temperature,
+        `"LOCATION : ${json.location.name},
+        "COUNTRY : ${json.location.country},
+        "REGION : ${json.location.region},
+        "TEMPERATURE : ${json.current.temperature}`
         ));
 
 });
