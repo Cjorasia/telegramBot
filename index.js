@@ -11,6 +11,16 @@ const bot = new Composer
 // Rest Commands
 bot.start((ctx) => ctx.reply('Welcome'));
 
+bot.on('text', (ctx) => {
+    let query = ctx.update.message.text;
+    apixuClient.current(query).then((current) => {
+      return ctx.reply(
+        `The current weather in ${query} is C: ${current.current.temp_c} F:${current.current.temp_f}`);
+    }).catch((err) => {
+      return ctx.reply('This city is not exists', err);
+    });
+  });
+
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
